@@ -1,13 +1,13 @@
 # PoliradioAPP
 APP to stream the radio station of the Politécnico Grancolombiano
 
-#Requeriments 
+# Requeriments 
 Ionic 4 Installed
 Internet connection
 
-#Installation
+# Installation
 Clone the repo
 Run npm install into the folder project
 
-#Interoperability with
+# Interoperability with
 Uses the API of Sourcefabric Airtime Pro

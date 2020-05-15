@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     SplashScreen,
     StreamingMedia,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications
     
     
   ],

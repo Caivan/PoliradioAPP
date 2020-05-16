@@ -1,14 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-
-
-export class Tab2Page {
-/*
+export class HeaderComponent{
+ 
   @ViewChild('audioPlayer',{static: true})audioPlayer: HTMLMediaElement;
 
   public URL= "https://poliradio.out.airtime.pro/poliradio_b";
@@ -16,9 +15,20 @@ export class Tab2Page {
   isPlaying = false;
   progress = 0;
 
+  constructor(private router:Router){
+      router.events.forEach((event) => {
+        if(event instanceof NavigationStart) {
+           this.audioPlayer.pause()
+           this.isPlaying = false;
+        }
+         
+      });
 
-  constructor() {
+  }
 
+
+  ngOnDestroy(): void {
+    this.audioPlayer.pause();
   }
 
   control(event:any){
@@ -53,6 +63,5 @@ export class Tab2Page {
     }
   }
 
-*/
-}
 
+}

@@ -1,7 +1,8 @@
 {
   "name": "Poliradio",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "ffa22871"

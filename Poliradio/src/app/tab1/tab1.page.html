@@ -1,35 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="audio-player">
-      
-      <div id="play-btn"></div>
-
-      <div class="audio-wrapper" id="player-container" href="javascript:;">
-        <audio id="player" ontimeupdate="initProgressBar()">
-          <source src="https://poliradio.out.airtime.pro/poliradio_b" >
-        </audio>
-      </div>
-      
-      <div class="player-controls scrubber">
-        <!--Song Name-->
-        <p>Oslo</p>
-        <!--Artist Name-->
-        <small>Holy Esque</small>
-        
-        <!--
-        <span id="seekObjContainer">
-          <progress id="seekObj" value="0" max="1"></progress>
-        </span>
-        <br>
-        <small style="float: left; position: relative; left: 15px;" class="start-time"></small>
-        <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
-        -->
-      </div>
-      <div class="album-image" style="background-image: url('https://artwork-cdn.7static.com/static/img/sleeveart/00/051/614/0005161476_350.jpg')"></div>
-    </div>
-  </ion-toolbar>
-</ion-header>
-
+<app-header></app-header>
 <ion-content [fullscreen]="true">
   <div *ngFor = "let post of news">
     <h1>{{ post.title.rendered }}</h1>

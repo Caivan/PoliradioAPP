@@ -9,9 +9,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from "@angular/common/http";
+import { WordPressConnectionService } from "./word-press-connection.service";
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+
 
 
 /**
@@ -20,20 +23,22 @@ import { SharedModule } from './shared/shared.module';
 import {SonginfoService} from './services/songinfo.service';
 
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,SharedModule,HttpClientModule],
-  
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    SharedModule,
+    HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
     StreamingMedia,
     SonginfoService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
-    
+    WordPressConnectionService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

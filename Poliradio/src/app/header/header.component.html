@@ -7,7 +7,7 @@
 
 
       <div class="audio-wrapper" id="player-container" href="javascript:;">
-        <audio  preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media" #audioPlayer>
+        <audio  preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media" #audioPlayer (ontimeupdate)="getCurrent()">
           <source [src]="URL" type="audio/mpeg">
           </audio>
       </div>
@@ -16,9 +16,9 @@
       
       <div class="player-controls scrubber">
         <!--Song Name-->
-        <p>Oslo</p>
+        <p>{{songName}}</p>
         <!--Artist Name-->
-        <small>Holy Esque</small>
+        <small>{{artistName}}</small>
         
         <!--
         <span id="seekObjContainer">
@@ -29,10 +29,10 @@
         <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
         -->
       </div>
-      <div class="album-image" style="background-image: url('https://artwork-cdn.7static.com/static/img/sleeveart/00/051/614/0005161476_350.jpg')"></div>
+      <div class="album-image" style="background-image: src('https://poliradio.airtime.pro/api/album-artwork?id=67.png')"></div>
     </div>
-  </ion-toolbar>
-
-  <ion-progress-bar [value] ="progress"></ion-progress-bar>
+  </ion-toolbar>  
+  <ion-progress-bar [value] ="progress"> </ion-progress-bar>
+  
 
 </ion-header>

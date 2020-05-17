@@ -1,9 +1,16 @@
 ion-content ion-toolbar {
     --background: translucent;
   }
+  .audio-player:hover{
+    background: light-gray;
+    color: #3498DB;
+  }
+
   .audio-player {
-    background: white;
+    background:#1a3882;
+   color: whitesmoke;
     border: 1px solid lighten(#acacac, 20%);
+    font: 150% sans-serif;
     width: 100%;
     text-align: center;
     display: flex;
@@ -12,12 +19,14 @@ ion-content ion-toolbar {
     max-height: 100px;
     //margin: 4rem 0 4rem 0;
     .album-image {
+      background-image: url('https://poliradio.airtime.pro/api/album-artwork?id=67.png');
       min-height: 5%;
       height: auto;
       max-height: 100%;
       width: 50%;
       max-width: 100px;
       background-size: cover;
+      border-radius: 50%;
     }
     .player-controls {
       align-items: center;
@@ -60,4 +69,5 @@ ion-content ion-toolbar {
         background-image: url('http://www.lukeduncan.me/images/pause-button.png');
       }
     }
+    
   }

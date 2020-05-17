@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule } from "@angular/common/http";
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,6 +14,14 @@ import { WordPressConnectionService } from "./word-press-connection.service";
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+
+
+
+/**
+ * SERVICES
+ */
+import {SonginfoService} from './services/songinfo.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
     StatusBar,
     SplashScreen,
     StreamingMedia,
+    SonginfoService,
     WordPressConnectionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

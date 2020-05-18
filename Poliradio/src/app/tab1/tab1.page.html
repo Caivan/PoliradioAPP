@@ -1,10 +1,16 @@
 <app-header></app-header>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngFor="let post of news">
+    <h1>{{ post.title.rendered }}</h1>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div id="contentIcon">
+    <button (click)="previousPage()">
+      <ion-icon name="arrow-back-circle-outline"></ion-icon>
+    </button>
+
+    <button (click)="nextPage()">
+      <ion-icon name="arrow-forward-circle-outline" font-size="100px"></ion-icon>
+    </button>
+  </div>
 </ion-content>

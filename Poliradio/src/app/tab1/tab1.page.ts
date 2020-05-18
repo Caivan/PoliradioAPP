@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver } from '@angular/core';
-import { WordPressConnectionService } from "../word-press-connection.service";
+import { WordPressConnectionService } from "../services/word-press-connection.service";
 import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({

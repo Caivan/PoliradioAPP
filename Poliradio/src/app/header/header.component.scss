@@ -19,7 +19,7 @@ ion-content ion-toolbar {
     max-height: 100px;
     //margin: 4rem 0 4rem 0;
     .album-image {
-      background-image: url('https://poliradio.airtime.pro/api/album-artwork?id=67.png');
+      background-image: url(../../assets/audioplayer/null-image.png);
       min-height: 5%;
       height: auto;
       max-height: 100%;
@@ -27,10 +27,18 @@ ion-content ion-toolbar {
       max-width: 100px;
       background-size: cover;
       border-radius: 50%;
+      z-index: 9999;
+      margin: 0.15%;
+
+      img{
+        border-radius: 50%;
+      }
     }
+
     .player-controls {
       align-items: center;
       justify-content: center;
+      color: #fff;
       //margin-top: 2.5rem;
       flex: 3;
   /*    progress {

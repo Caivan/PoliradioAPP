@@ -29,7 +29,9 @@
         <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
         -->
       </div>
-      <div class="album-image" style="background-image: src('https://poliradio.airtime.pro/api/album-artwork?id=67.png')"></div>
+      <div class="album-image">
+        <img *ngIf="this.albumImage" [src]="this.albumImage" alt="">
+      </div>
     </div>
   </ion-toolbar>  
   <ion-progress-bar [value] ="progress"> </ion-progress-bar>

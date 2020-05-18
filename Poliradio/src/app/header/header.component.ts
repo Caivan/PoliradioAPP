@@ -4,6 +4,7 @@ import {SonginfoService} from "../services/songinfo.service";
 import { stringify } from 'querystring';
 import { format } from 'url';
 import { formatNumber, formatDate } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent{
  
   @ViewChild('audioPlayer',{static: true})audioPlayer: HTMLMediaElement;
 
-  public URL= "https://poliradio.out.airtime.pro/poliradio_b";
+  public URL= environment.ACCESS_POINT_STREAMING;
   loaded = false;
   isPlaying = false;
   progress;
@@ -28,6 +29,7 @@ export class HeaderComponent{
   actualHour;
   position;
   durationValues:string[];  
+
   constructor(private router:Router, private songinfoService:SonginfoService){
       router.events.forEach((event) => {
         if(event instanceof NavigationStart) {
@@ -48,7 +50,6 @@ export class HeaderComponent{
 
   control(event:any){
       this.loaded = true;
-      console.log(event)
       this.audioPlayer = event.srcElement;      
   }
 
@@ -64,7 +65,6 @@ export class HeaderComponent{
     if(this.loaded){
       if(this.isPlaying){
         this.progress=this.position;
-        console.log(this.progress);
         this.getCurrent();
         if(this.songName!=this.songCurrentName){
           this.progress=0;
@@ -92,8 +92,8 @@ export class HeaderComponent{
       let headers = keys.map(key =>
       `${key}: ${resp.headers.get(key)}`);
       this.info=resp.body;
-      this.songName=this.info.current.metadata.track_title;
-      this.artistName=this.info.current.metadata.artist_name; 
+      this.songName=decodeURIComponent(this.info.current.metadata.track_title);
+      this.artistName=decodeURIComponent(this.info.current.metadata.artist_name); 
       this.albumImage=this.info.current.album_artwork_image;  
       this.durationValues= this.info.current.metadata.length.split(":");     
       this.startSongHour=this.info.current.starts.split(" ")[1].split(":") //inicia la cancion      

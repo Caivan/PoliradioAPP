@@ -1,8 +1,20 @@
 <app-header></app-header>
 <ion-content [fullscreen]="true">
   <div *ngFor="let post of news">
-    <h1>{{ post.title.rendered }}</h1>
+    <ion-card>
+      <img src="./madison.jpg" />
+      <ion-card-header>
+        <ion-card-subtitle>{{ post.title.date }}</ion-card-subtitle>
+        <ion-card-title>{{ post.title.rendered }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ post.excerpt.rendered }}
+      </ion-card-content>
+    </ion-card>    <h1></h1>
   </div>
+
+
+
 
   <div id="contentIcon">
     <button (click)="previousPage()">

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { news } from '../Model/news';
 import { environment } from 'src/environments/environment';
-
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,11 @@ export class WordPressConnectionService {
     return this.http.get<news[]>(URL, {
       observe: 'response'
     });
+  }
+
+  public getNewsFromPage2(page): Observable<news[]> {
+    return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + page).pipe(
+      shareReplay()
+    )
   }
 }

@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from '../shared/shared.module';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { NewsModalPage } from '../news-modal/news-modal.page';
 
 
 @NgModule({
@@ -17,10 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    MatCardModule,
-    MatButtonModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, NewsModalPage],
+  entryComponents: [NewsModalPage]
 })
 export class Tab1PageModule {}

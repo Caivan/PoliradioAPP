@@ -12,18 +12,12 @@ import { AppComponent } from './app.component';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
-
-/**
- * Angular material
- */
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-
+import { NewsModalPage } from "./news-modal/news-modal.page";
 
 /**
  * SERVICES
  */
-import {SonginfoService} from './services/songinfo.service';
+import { SonginfoService } from './services/songinfo.service';
 import { WordPressConnectionService } from './services/word-press-connection.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,9 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule],
+    BrowserAnimationsModule],
   providers: [
     StatusBar,
     SplashScreen,

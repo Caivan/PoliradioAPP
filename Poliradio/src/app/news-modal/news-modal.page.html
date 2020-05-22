@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modal Page</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>{{ post.title.rendered }}</h1>
+  <h3>{{ post.excerpt.rendered }}</h3>
+  <p>{{ post.content.rendered }}</p>
+</ion-content>

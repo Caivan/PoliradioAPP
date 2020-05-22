@@ -10,18 +10,24 @@ import { environment } from 'src/environments/environment';
 })
 export class WordPressConnectionService {
   private headers: HttpHeaders;
-    constructor(private http: HttpClient) {
-        this.headers = new HttpHeaders({
-            "Content-Type": "application/json; charset=utf8"
-        });
-    }
-
-    /**
-     * Get all new from the wordpress webpage
-     */
-    public getNewsFromPage(index): Observable<HttpResponse< news[]> >{
-      return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + index, {
-        observe: 'response'
+  constructor(private http: HttpClient) {
+    this.headers = new HttpHeaders({
+      "Content-Type": "application/json; charset=utf8"
     });
-    }
+  }
+
+  /**
+   * Get all new from the wordpress webpage
+   */
+  public getNewsFromPage(index): Observable<HttpResponse<news[]>> {
+    return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + index, {
+      observe: 'response'
+    });
+  }
+
+  public getNewImage(URL): Observable<HttpResponse<news[]>> {
+    return this.http.get<news[]>(URL, {
+      observe: 'response'
+    });
+  }
 }

@@ -8,8 +8,17 @@ ion-icon {
   background-color: white;
 }
 #contentIcon{
+  display: inline-block;
   background-color: white;
+  margin: 10px;
 }
+
+#contentIcon button{
+  display: inline-block;
+  margin-left: 50px;
+  margin-right: 8px;
+}
+
 .audio-player {
   background: white;
   border: 1px solid lighten(#acacac, 20%);
@@ -69,5 +78,5 @@ ion-icon {
     &.pause {
       background-image: url('http://www.lukeduncan.me/images/pause-button.png');
     }
-  } 
+  }
 }

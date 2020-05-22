@@ -12,14 +12,14 @@ import { AppComponent } from './app.component';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
-
-
+import { NewsModalPage } from "./news-modal/news-modal.page";
 
 /**
  * SERVICES
  */
-import {SonginfoService} from './services/songinfo.service';
+import { SonginfoService } from './services/songinfo.service';
 import { WordPressConnectionService } from './services/word-press-connection.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -30,7 +30,8 @@ import { WordPressConnectionService } from './services/word-press-connection.ser
     IonicModule.forRoot(),
     AppRoutingModule,
     SharedModule,
-    HttpClientModule],
+    HttpClientModule,
+    BrowserAnimationsModule],
   providers: [
     StatusBar,
     SplashScreen,

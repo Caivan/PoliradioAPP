@@ -15,7 +15,7 @@ export class Tab1Page {
 
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll2: IonInfiniteScroll;
 
-  scrollArray: news[];
+  scrollArray: any[];
   index = 1;
   totalNews = 1;
 
@@ -65,7 +65,6 @@ export class Tab1Page {
       });
     }
     this.index++;
-    event.target.complete();
   }
 
   doInfinite(event) {

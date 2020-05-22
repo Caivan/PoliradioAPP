@@ -5,6 +5,8 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { NewsModalPage } from '../news-modal/news-modal.page';
 import { news } from "../Model/news";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -16,6 +18,7 @@ export class Tab1Page {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll2: IonInfiniteScroll;
 
   scrollArray: news[];
+  news$ : Observable<news[]>;
   index = 1;
   totalNews = 1;
 
@@ -36,7 +39,7 @@ export class Tab1Page {
   }
 
   ngOnInit() {
-    this.getNews(true, "");
+    this.getNews2();
   }
 
   async getNews(isFirst, event) {
@@ -69,7 +72,12 @@ export class Tab1Page {
   }
 
   doInfinite(event) {
-    this.getNews(false, event);
+    this.getNews2();
+  }
+
+
+  async getNews2(){
+    this.news$ = this.wpConnection.getNewsFromPage2(this.index);
   }
 
 }

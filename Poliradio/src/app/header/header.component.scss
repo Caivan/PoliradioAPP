@@ -23,7 +23,7 @@ ion-content ion-toolbar {
       min-height: 5%;
       height: auto;
       max-height: 100%;
-      width: 50%;
+      width: 40%;
       max-width: 100px;
       background-size: cover;
       border-radius: 50%;
@@ -32,6 +32,9 @@ ion-content ion-toolbar {
 
       img{
         border-radius: 50%;
+        width: 70%;
+        height: 70%;
+        padding: 0.5%;
       }
     }
 

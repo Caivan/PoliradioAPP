@@ -22,7 +22,7 @@ export class HeaderComponent{
   duration;
   songName;
   songCurrentName;
-  artistName;
+  artistName:String;
   albumImage;  
   info;  
   startSongHour;
@@ -92,7 +92,8 @@ export class HeaderComponent{
       let headers = keys.map(key =>
       `${key}: ${resp.headers.get(key)}`);
       this.info=resp.body;
-      this.songName=decodeURIComponent(this.info.current.metadata.track_title);
+      this.songName=String(this.info.current.metadata.track_title);
+    
       this.artistName=decodeURIComponent(this.info.current.metadata.artist_name); 
       this.albumImage=this.info.current.album_artwork_image;  
       this.durationValues= this.info.current.metadata.length.split(":");     

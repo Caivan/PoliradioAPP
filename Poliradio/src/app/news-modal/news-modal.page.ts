@@ -14,7 +14,7 @@ export class NewsModalPage implements OnInit {
   ngOnInit() {
   }
 
-  @Input() public post: news;
+  @Input() public post: any;
 
   async closeModal() {
     await this.modalController.dismiss();

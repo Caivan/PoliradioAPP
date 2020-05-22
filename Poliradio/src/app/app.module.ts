@@ -9,10 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
-import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
-import { NewsModalPage } from "./news-modal/news-modal.page";
 
 /**
  * SERVICES
@@ -35,7 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     StatusBar,
     SplashScreen,
-    StreamingMedia,
     SonginfoService,
     WordPressConnectionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

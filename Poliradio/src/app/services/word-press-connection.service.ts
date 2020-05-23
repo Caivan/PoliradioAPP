@@ -19,21 +19,15 @@ export class WordPressConnectionService {
   /**
    * Get all new from the wordpress webpage
    */
-  public getNewsFromPage(index): Observable<HttpResponse<news[]>> {
-    return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + index, {
-      observe: 'response'
-    });
-  }
-
-  public getNewImage(URL): Observable<HttpResponse<news[]>> {
-    return this.http.get<news[]>(URL, {
-      observe: 'response'
-    });
-  }
-
-  public getNewsFromPage2(page): Observable<news[]> {
+  public getNewsFromPage(page): Observable<news[]> {
     return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + page).pipe(
       shareReplay()
-    )
+    );
+  }
+
+  public getNewsImage(id): Observable<ImageBitmap> {
+    return this.http.get<ImageBitmap>(environment.ACCESS_POINT_POSTIMAGES + id).pipe(
+      shareReplay()
+    );
   }
 }

@@ -6,7 +6,6 @@ import { ModalController } from '@ionic/angular';
 import { NewsModalPage } from '../news-modal/news-modal.page';
 import { news } from "../Model/news";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -17,9 +16,8 @@ export class Tab1Page {
 
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll2: IonInfiniteScroll;
 
-  newsArray: news[];
   news$ : Observable<news[]>;
-  index = 1;
+  page = 1;
   totalNews = 1;
 
   constructor(private wpConnection: WordPressConnectionService, private modalController: ModalController) { }
@@ -34,7 +32,7 @@ export class Tab1Page {
 
     return await modal.present().then(_ => {
       // triggered when opening the modal
-      console.log("Se mando");
+      console.log("Modal open");
     });
   }
 
@@ -43,12 +41,24 @@ export class Tab1Page {
   }
 
   doInfinite(event) {
-    this.getNews();
+    this.addNews();
+    event.target.complete();
   }
 
-
   async getNews(){
-    this.news$ = this.wpConnection.getNewsFromPage2(this.index);
+    this.news$ = this.wpConnection.getNewsFromPage(this.page);
+    this.page++;
+  }
+
+  async addNews(){
+    this.wpConnection.getNewsFromPage(this.page).subscribe(res => {
+      res.forEach(element => {
+        this.news$.subscribe(res2 => {
+          res2.push(element);
+        });
+      });
+    });
+    this.page++;
   }
 
 }

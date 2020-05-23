@@ -1,10 +1,21 @@
 <app-header></app-header>
 <ion-content [fullscreen]="true">
-  <div *ngFor = "let post of news">
-    <h1>{{ post.title.rendered }}</h1>
-  </div>
-  <div>
-    <button (click)="previousPage()">Anterior</button>
-    <button (click)="nextPage()">Siguiente</button>
-  </div>
+
+  <ion-list>
+
+    <ion-item *ngFor="let post of news$ | async">
+      <ion-card class="card" (click)="openModal(post)">
+        <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
+        <ion-card-content>
+          <div [innerHTML]="post.excerpt.rendered"></div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

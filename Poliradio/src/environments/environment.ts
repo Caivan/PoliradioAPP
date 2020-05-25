@@ -7,7 +7,7 @@ export const environment = {
   ACCESS_POINT_POSTS: "https://poliradio.poligran.edu.co/wp-json/wp/v2/posts/?page=",
   ACCESS_POINT_STREAMING_INFO: "http://poliradio.airtime.pro/api/live-info",
   ACCESS_POINT_STREAMING: "https://poliradio.out.airtime.pro/poliradio_b",
-  ACCESS_POINT_POSTIMAGES: "https://poliradio.poligran.edu.co/wp-json/wp/v2/media?parent="
+  ACCESS_POINT_POSTIMAGES: "https://poliradio.poligran.edu.co/wp-json/wp/v2/media/"
 };
 
 /*

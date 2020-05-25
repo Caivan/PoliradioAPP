@@ -2,7 +2,7 @@ export class news{
     title : string;
     content : string;
     excerpt : string;
-    featured_media : number;
+    featured_media : string;
 
     constructor (title, content, excrept, featured_media){
         this.content = content;

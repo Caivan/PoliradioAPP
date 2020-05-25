@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { news } from '../Model/news';
 import { environment } from 'src/environments/environment';
 import { shareReplay } from 'rxjs/operators';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import { img } from '../Model/img';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +27,8 @@ export class WordPressConnectionService {
     );
   }
 
-  public getNewsImage(id): Observable<ImageBitmap> {
-    return this.http.get<ImageBitmap>(environment.ACCESS_POINT_POSTIMAGES + id).pipe(
+  public getNewsImage(id): Observable<img> {
+    return this.http.get<img>(environment.ACCESS_POINT_POSTIMAGES + id).pipe(
       shareReplay()
     );
   }

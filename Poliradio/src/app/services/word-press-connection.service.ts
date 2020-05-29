@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { news } from '../Model/news';
 import { environment } from 'src/environments/environment';
 import { shareReplay } from 'rxjs/operators';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import { img } from '../Model/img';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +21,15 @@ export class WordPressConnectionService {
   /**
    * Get all new from the wordpress webpage
    */
-  public getNewsFromPage(index): Observable<HttpResponse<news[]>> {
-    return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + index, {
-      observe: 'response'
-    });
-  }
-
-  public getNewImage(URL): Observable<HttpResponse<news[]>> {
-    return this.http.get<news[]>(URL, {
-      observe: 'response'
-    });
-  }
-
-  public getNewsFromPage2(page): Observable<news[]> {
+  public getNewsFromPage(page): Observable<news[]> {
     return this.http.get<news[]>(environment.ACCESS_POINT_POSTS + page).pipe(
       shareReplay()
-    )
+    );
+  }
+
+  public getNewsImage(id): Observable<img> {
+    return this.http.get<img>(environment.ACCESS_POINT_POSTIMAGES + id).pipe(
+      shareReplay()
+    );
   }
 }

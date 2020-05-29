@@ -1,14 +1,17 @@
-ion-content ion-toolbar {
-    --background: translucent;
+ion-content {
+    --background: none;
+    background-image: url('../../assets/audioplayer/fondo.jpeg');
   }
   .audio-player:hover{
     background: light-gray;
     color: #3498DB;
-  }
-
+  }  
   .audio-player {
-    background:#1a3882;
-   color: whitesmoke;
+    background-image: url('../../assets/audioplayer/fondo.jpeg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: whitesmoke;
     border: 1px solid lighten(#acacac, 20%);
     font: 150% sans-serif;
     width: 100%;
@@ -20,14 +23,18 @@ ion-content ion-toolbar {
     //margin: 4rem 0 4rem 0;
     .album-image {
       background-image: url(../../assets/audioplayer/null-image.png);
+      background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
       min-height: 5%;
       height: auto;
       max-height: 100%;
       width: 40%;
       max-width: 100px;
-      background-size: cover;
-      border-radius: 50%;
-      z-index: 9999;
+      //background-size: cover;
+      //border-radius: 50%;
+      //z-index: 9999;
       margin: 0.15%;
 
       img{
@@ -36,10 +43,12 @@ ion-content ion-toolbar {
       }
     }
 
-    .player-controls {
+    .player-controls {      
       align-items: center;
       justify-content: center;
       color: #fff;
+      margin-left: 2rem;
+      margin-right: auto;
       //margin-top: 2.5rem;
       flex: 3;
   /*    progress {
@@ -73,7 +82,7 @@ ion-content ion-toolbar {
       background-size: cover;
       width: 50px;
       height: 50px;
-      margin: 1.5rem 0 2rem 2rem;
+      margin: 1.5rem 0 3rem 0.5rem;
       &.pause {
         background-image: url('http://www.lukeduncan.me/images/pause-button.png');
       }

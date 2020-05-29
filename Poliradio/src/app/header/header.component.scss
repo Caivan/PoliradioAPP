@@ -5,8 +5,7 @@ ion-content {
   .audio-player:hover{
     background: light-gray;
     color: #3498DB;
-  }
-
+  }  
   .audio-player {
     background-image: url('../../assets/audioplayer/fondo.jpeg');
     background-position: center top;
@@ -44,10 +43,12 @@ ion-content {
       }
     }
 
-    .player-controls {
+    .player-controls {      
       align-items: center;
       justify-content: center;
       color: #fff;
+      margin-left: 2rem;
+      margin-right: auto;
       //margin-top: 2.5rem;
       flex: 3;
   /*    progress {
@@ -81,7 +82,7 @@ ion-content {
       background-size: cover;
       width: 50px;
       height: 50px;
-      margin: 1.5rem 0 2rem 2rem;
+      margin: 1.5rem 0 3rem 0.5rem;
       &.pause {
         background-image: url('http://www.lukeduncan.me/images/pause-button.png');
       }

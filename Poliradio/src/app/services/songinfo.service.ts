@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
+import {songInfo} from '../Model/songInfo';
 import { HttpClient, HttpHeaders,HttpResponse } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
@@ -21,5 +23,10 @@ export class SonginfoService {
     return this.http.get<string>(environment.ACCESS_POINT_STREAMING_INFO,{
       observe:'response'
     });
+  }
+  public getInfo():Observable<songInfo>{
+    return this.http.get<songInfo>(environment.ACCESS_POINT_STREAMING_INFO).pipe(
+      shareReplay()
+    );
   }
 }

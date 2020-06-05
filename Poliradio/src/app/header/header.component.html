@@ -1,38 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header >
   <ion-toolbar>
     <div class="audio-player">
-      
+
       <div (click)="play()" *ngIf="!isPlaying" id="play-btn"></div>
       <div (click)="stop()" *ngIf="isPlaying" id="play-btn" class="pause"></div>
 
 
       <div class="audio-wrapper" id="player-container" href="javascript:;">
-        <audio  preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media" #audioPlayer (ontimeupdate)="getCurrent()">
+        <audio preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media" #audioPlayer>
           <source [src]="URL" type="audio/mpeg">
-          </audio>
+        </audio>
       </div>
 
-      
-      
       <div class="player-controls scrubber">
-        <!--Song Name-->
-        <p>{{songName}}</p>
-        <!--Artist Name-->
-        <small>{{artistName}}</small>
-        
-        <!--
-        <span id="seekObjContainer">
-          <progress id="seekObj" value="0" max="1"></progress>
-        </span>
-        <br>
-        <small style="float: left; position: relative; left: 15px;" class="start-time"></small>
-        <small style="float: right; position: relative; right: 20px;" class="end-time"></small>
-        -->
+        <p style="font-weight: 700;" [innerHTML]="songName"> </p>
+        <small [innerHTML]="artistName"></small>
       </div>
-      <div class="album-image" style="background-image: src('https://poliradio.airtime.pro/api/album-artwork?id=67.png')"></div>
+      <div class="album-image">
+        <img *ngIf="this.albumImage" [src]="this.albumImage" alt="">
+      </div>
     </div>
-  </ion-toolbar>  
-  <ion-progress-bar [value] ="progress"> </ion-progress-bar>
-  
+  </ion-toolbar>
+  <ion-progress-bar [value]="progress"> </ion-progress-bar>
+
 
 </ion-header>

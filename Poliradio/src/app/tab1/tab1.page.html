@@ -1,28 +1,21 @@
 <app-header></app-header>
 <ion-content [fullscreen]="true">
-  <div *ngFor="let post of news">
-    <ion-card>
-      <img src="./madison.jpg" />
-      <ion-card-header>
-        <ion-card-subtitle>{{ post.title.date }}</ion-card-subtitle>
-        <ion-card-title>{{ post.title.rendered }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        {{ post.excerpt.rendered }}
-      </ion-card-content>
-    </ion-card>    <h1></h1>
-  </div>
+  <ion-list>
 
+    <ion-item *ngFor="let post of news$ | async">
+      <ion-card class="card" (click)="openModal(post)">
+        <img *ngIf="post.featured_media" [src]="post.featured_media">
+        <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
+        <ion-card-content>
+          <div [innerHTML]="post.excerpt.rendered"></div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 
+  <ion-infinite-scroll threshold="5px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
-
-  <div id="contentIcon">
-    <button (click)="previousPage()">
-      <ion-icon name="arrow-back-circle-outline"></ion-icon>
-    </button>
-
-    <button (click)="nextPage()">
-      <ion-icon name="arrow-forward-circle-outline" font-size="100px"></ion-icon>
-    </button>
-  </div>
 </ion-content>

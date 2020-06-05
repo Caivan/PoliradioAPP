@@ -1,6 +1,14 @@
-ion-content ion-toolbar {
+ion-content {
   --background: translucent;
   background-color: white;
+  }
+
+.card{
+  width: 100%;
+  
+  .card-title{
+    margin: 0.5%;
+  }
 }
 
 ion-icon {
@@ -8,8 +16,17 @@ ion-icon {
   background-color: white;
 }
 #contentIcon{
+  display: inline-block;
   background-color: white;
+  margin: 10px;
 }
+
+#contentIcon button{
+  display: inline-block;
+  margin-left: 50px;
+  margin-right: 8px;
+}
+
 .audio-player {
   background: white;
   border: 1px solid lighten(#acacac, 20%);
@@ -34,25 +51,7 @@ ion-icon {
     justify-content: center;
     //margin-top: 2.5rem;
     flex: 3;
-/*    progress {
-      width: 90%;
-    }
-    progress[value] {
-      -webkit-appearance: none;
-      appearance: none;
-      background-color: white;
-      color: blue;
-      height: 5px;
-    }
-    progress[value]::-webkit-progress-bar {
-      background-color: white;
-      border-radius: 2px;
-      border: 1px solid lighten(#acacac, 20%);
-      color: blue;
-    }
-    progress::-webkit-progress-value {
-      background-color: blue;
-    }*/
+
     p {
       font-size: 1.6rem;
       text-align: center;
@@ -69,5 +68,5 @@ ion-icon {
     &.pause {
       background-image: url('http://www.lukeduncan.me/images/pause-button.png');
     }
-  } 
+  }
 }

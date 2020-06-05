@@ -8,6 +8,7 @@ import { formatNumber, formatDate } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { songInfo } from '../Model/songInfo';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,9 +33,8 @@ export class HeaderComponent {
   actualHour;
   position;
   durationValues: string[];
-  progress = 0;
   
-  constructor(private router: Router, private songinfoService: SonginfoService,,private localNotifications : LocalNotifications) {
+  constructor(private router: Router, private songinfoService: SonginfoService, private localNotifications : LocalNotifications) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         this.audioPlayer.pause()
@@ -44,7 +44,8 @@ export class HeaderComponent {
     this.getCurrent();
     this.songCurrentName = this.songName;
   }
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    this.localNotifications.cancelAll(); 
     this.song$ = this.songinfoService.getInfo();
     this.song$.subscribe(resp => {
       setInterval(() => {          
@@ -55,17 +56,11 @@ export class HeaderComponent {
         this.artistName = resp.current.metadata.artist_name;
         this.albumImage = resp.current.album_artwork_image;
         this.durationValues = resp.current.metadata.length.split(":");
-        this.startSongHour = resp.current.starts.split(" ")[1].split(":") ;
+        this.startSongHour = resp.current.starts.split(" ")[1].split(":");
       },
         1000);
       //inicia la cancion                    
     });
-  }
-
-  
-  ngOnInit():void{
-  //console.log("init");
-  this.localNotifications.cancelAll();
   }
 
   ngOnDestroy(): void {
@@ -95,8 +90,8 @@ export class HeaderComponent {
         });    
       }
     }
-    
   }
+  
   update() {
     if (this.loaded) {
       if (this.isPlaying) {

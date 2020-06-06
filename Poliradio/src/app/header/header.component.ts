@@ -7,6 +7,7 @@ import { format } from 'url';
 import { formatNumber, formatDate } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { songInfo } from '../Model/songInfo';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,7 @@ export class HeaderComponent {
   public URL = environment.ACCESS_POINT_STREAMING;
   song$: Observable<songInfo>;
   loaded = false;
-  isPlaying = false;
+  isPlaying = false;  
   progress;
   duration;
   songName;
@@ -32,8 +33,8 @@ export class HeaderComponent {
   actualHour;
   position;
   durationValues: string[];
-
-  constructor(private router: Router, private songinfoService: SonginfoService) {
+  
+  constructor(private router: Router, private songinfoService: SonginfoService, private localNotifications : LocalNotifications) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         this.audioPlayer.pause()
@@ -43,7 +44,8 @@ export class HeaderComponent {
     this.getCurrent();
     this.songCurrentName = this.songName;
   }
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    this.localNotifications.cancelAll(); 
     this.song$ = this.songinfoService.getInfo();
     this.song$.subscribe(resp => {
       setInterval(() => {          
@@ -54,7 +56,7 @@ export class HeaderComponent {
         this.artistName = resp.current.metadata.artist_name;
         this.albumImage = resp.current.album_artwork_image;
         this.durationValues = resp.current.metadata.length.split(":");
-        this.startSongHour = resp.current.starts.split(" ")[1].split(":") ;
+        this.startSongHour = resp.current.starts.split(" ")[1].split(":");
       },
         1000);
       //inicia la cancion                    
@@ -63,11 +65,14 @@ export class HeaderComponent {
 
   ngOnDestroy(): void {
     this.audioPlayer.pause();
+    this.localNotifications.cancelAll();
+    console.log("destroy");
   }
-
-  control(event: any) {
-    this.loaded = true;
-    this.audioPlayer = event.srcElement;
+    
+  control(event:any){
+      this.loaded = true;
+      this.audioPlayer = event.srcElement;
+      this.progress = 0;
   }
 
   play() {
@@ -75,9 +80,18 @@ export class HeaderComponent {
       if (!this.isPlaying) {
         this.audioPlayer.play();
         this.isPlaying = true;
+
+        this.localNotifications.schedule({
+          id: 1,
+          title:'PoliRadio reproduciendo',
+          text: 'Toque para volver a la aplicación',
+          lockscreen: true,
+          sticky: true
+        });    
       }
     }
   }
+  
   update() {
     if (this.loaded) {
       if (this.isPlaying) {
@@ -97,6 +111,7 @@ export class HeaderComponent {
       this.audioPlayer.pause();
       this.isPlaying = false;
       this.progress = 0;
+      this.localNotifications.cancelAll();
     }
   }
   /**

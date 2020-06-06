@@ -99,7 +99,6 @@ export class HeaderComponent {
         this.getProgress();
         if (this.songName != this.songCurrentName) {
           this.progress = 0;
-          this.audioPlayer.currentTime = 0;
           this.songCurrentName = this.songName;
         }
       }

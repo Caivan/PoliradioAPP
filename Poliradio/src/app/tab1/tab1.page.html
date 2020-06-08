@@ -4,7 +4,7 @@
 
     <ion-item *ngFor="let post of news$ | async">
       <ion-card class="card" (click)="openModal(post)">
-        <img *ngIf="post.featured_media" [src]="post.featured_media">
+        <img *ngIf="post?.featured_media" [src]="post?.featured_media">
         <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
         <ion-card-content>
           <div [innerHTML]="post.excerpt.rendered"></div>

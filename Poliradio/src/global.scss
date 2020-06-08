@@ -24,3 +24,20 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+brand{
+    --main-color-tabs: #2c86ec;
+}
+
+ion-tab-button {
+    --background: var(--main-color-tabs) !important;
+
+    --ripple-color: var(--ion-color-primary);
+    --color: var(--ion-color-light-shade);
+    --color-selected: var(--ion-color-medium);
+  }
+  
+  ion-tab-button.tab-selected {
+    --background: var(--main-color-tabs) !important;
+    --color-selected: var(--ion-color-light);
+  }

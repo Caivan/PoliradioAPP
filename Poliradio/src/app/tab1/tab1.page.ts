@@ -51,8 +51,8 @@ export class Tab1Page {
   async getNews(){
     this.news$ = this.wpConnection.getNewsFromPage(this.page);
     this.news$.subscribe(res => {
-      res.forEach(element => {
-        this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
+      res.forEach(async element => {
+        await this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
           element.featured_media = res.source_url;
         });
       })
@@ -62,8 +62,8 @@ export class Tab1Page {
 
   async addNews(){
     this.wpConnection.getNewsFromPage(this.page).subscribe(res => {
-      res.forEach(element => {
-        this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
+      res.forEach(async element => {
+          this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
           element.featured_media = res.source_url;
         });
         this.news$.subscribe(res2 => {

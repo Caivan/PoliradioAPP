@@ -54,7 +54,7 @@ export class HeaderComponent {
         this.artistName = resp.current.metadata.artist_name;
         this.albumImage = resp.current.album_artwork_image;
         this.durationValues = resp.current.metadata.length.split(":");
-        this.startSongHour = resp.current.starts.split(" ")[1].split(":") ;
+        this.startSongHour = resp.current.starts.split(" ")[1].split(":");
       },
         1000);
       //inicia la cancion                    

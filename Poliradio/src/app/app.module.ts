@@ -17,10 +17,15 @@ import { SharedModule } from './shared/shared.module';
 import { SonginfoService } from './services/songinfo.service';
 import { WordPressConnectionService } from './services/word-press-connection.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/**
+ * PIPES
+ */
+
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

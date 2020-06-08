@@ -4,7 +4,10 @@ import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { NewsModalPage } from '../news-modal/news-modal.page';
+import { environment } from "src/environments/environment";
 import { news } from "../Model/news";
+import { Observable } from 'rxjs';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-tab1',
@@ -15,9 +18,10 @@ export class Tab1Page {
 
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll2: IonInfiniteScroll;
 
-  scrollArray: any[];
-  index = 1;
+  news$ : Observable<news[]>;
+  page = 1;
   totalNews = 1;
+  imgSource = environment.ACCESS_POINT_POSTIMAGES;
 
   constructor(private wpConnection: WordPressConnectionService, private modalController: ModalController) { }
 
@@ -31,44 +35,43 @@ export class Tab1Page {
 
     return await modal.present().then(_ => {
       // triggered when opening the modal
-      console.log("Se mando");
+      console.log("Modal open");
     });
   }
 
   ngOnInit() {
-    this.getNews(true, "");
-  }
-
-  async getNews(isFirst, event) {
-    if (isFirst) {
-      this.wpConnection.getNewsFromPage(this.index).subscribe(resp => {
-        const keys = resp.headers.keys();
-        let headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-        this.scrollArray = resp.body;
-        this.totalNews = Number(headers[5].substring(headers[5].length - 3, headers[5].length));
-      }, (err) => {
-        console.log(err);
-      });
-    } else {
-      this.wpConnection.getNewsFromPage(this.index).subscribe(resp => {
-        const keys = resp.headers.keys();
-        let headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-        let arr: news[];
-        arr = resp.body;
-        arr.forEach(element => {
-          this.scrollArray.push(element);
-        });
-      }, (err) => {
-        console.log(err);
-      });
-    }
-    this.index++;
+    this.getNews();
   }
 
   doInfinite(event) {
-    this.getNews(false, event);
+    this.addNews();
+    event.target.complete();
+  }
+
+  async getNews(){
+    this.news$ = this.wpConnection.getNewsFromPage(this.page);
+    this.news$.subscribe(res => {
+      res.forEach(element => {
+        this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
+          element.featured_media = res.source_url;
+        });
+      })
+    });
+    this.page++;
+  }
+
+  async addNews(){
+    this.wpConnection.getNewsFromPage(this.page).subscribe(res => {
+      res.forEach(element => {
+        this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
+          element.featured_media = res.source_url;
+        });
+        this.news$.subscribe(res2 => {
+          res2.push(element);
+        });
+      });
+    });
+    this.page++;
   }
 
 }

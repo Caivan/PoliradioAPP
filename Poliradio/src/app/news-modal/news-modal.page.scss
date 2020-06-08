@@ -1,4 +1,30 @@
-.content{
-    margin: 1%;
-    
+.content {
+  margin: 2%;
 }
+
+.content {
+  p {
+    padding: 1%;
+  }
+  strong {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  p img {
+    transform: translate(50%,0);
+  }
+  h2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a{
+      text-decoration: none;
+      color: #2c86ec ;
+  }
+}
+

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { SonginfoService } from "../services/songinfo.service";
 import { Observable } from 'rxjs';
@@ -13,25 +13,29 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
 
   @ViewChild('audioPlayer', { static: true }) audioPlayer: HTMLMediaElement;
 
   public URL = environment.ACCESS_POINT_STREAMING;
+  public DEFAULT_IMAGE:String = "../../assets/audioplayer/null-image.png";
+
   song$: Observable<songInfo>;
+  song: songInfo;
   loaded = false;
   isPlaying = false;  
-  progress;
-  duration;
-  songName;
+  progress:number;
+  duration:number;
+  songName:string;
   songCurrentName;
-  artistName: String;
-  albumImage;
+  artistName: string;
+  albumImage:string;
   info:songInfo;
-  startSongHour;
-  actualHour;
-  position;
+  startSongHour:string[];
+  actualHour:string;
+  position:number;
   durationValues: string[];
   
   constructor(private router: Router, private songinfoService: SonginfoService, private localNotifications : LocalNotifications) {
@@ -52,11 +56,12 @@ export class HeaderComponent {
         this.songinfoService.getInfo().subscribe(updt =>{
           resp=updt;
         })                 
-        this.songName = resp.current.metadata.track_title;              
-        this.artistName = resp.current.metadata.artist_name;
-        this.albumImage = resp.current.album_artwork_image;
-        this.durationValues = resp.current.metadata.length.split(":");
-        this.startSongHour = resp.current.starts.split(" ")[1].split(":");
+        this.song=resp;
+        this.songName = this.song.current.metadata.track_title;              
+        this.artistName = this.song.current.metadata.artist_name;
+        this.albumImage = this.song.current.album_artwork_image;
+        this.durationValues = this.song.current.metadata.length.split(":");
+        this.startSongHour = this.song.current.starts.split(" ")[1].split(":");
       },
         1000);
       //inicia la cancion                    
@@ -98,7 +103,7 @@ export class HeaderComponent {
         this.progress = this.position;
         this.getProgress();
         if (this.songName != this.songCurrentName) {
-          this.progress = 0;
+          this.progress = 0;          
           this.songCurrentName = this.songName;
         }
       }
@@ -123,7 +128,7 @@ export class HeaderComponent {
     let actualHour = new Date();
     actualHour.setHours(actualHour.getHours() + 5);
     let x = Number(actualHour.getHours()) * 3600 + Number(actualHour.getMinutes()) * 60 + Number(actualHour.getSeconds()); //hora actual en segundos 
-    let y = Number((this.startSongHour[0]) * 3600) + Number(this.startSongHour[1]) * 60 + Number(this.startSongHour[2]); //hora inicio cancion en segundos      
+    let y = Number(Number(this.startSongHour[0]) * 3600) + Number(this.startSongHour[1]) * 60 + Number(this.startSongHour[2]); //hora inicio cancion en segundos      
     this.duration = Number(this.durationValues[0]) * 3600 + Number(this.durationValues[1]) * 60 + Number(this.durationValues[2]);
     this.position = (x - y) / this.duration; //posicion inicial barra de progreso   
   }

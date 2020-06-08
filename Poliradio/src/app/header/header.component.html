@@ -17,7 +17,8 @@
         <small [innerHTML]="artistName"></small>
       </div>
       <div class="album-image">
-        <img *ngIf="this.albumImage" [src]="this.albumImage" alt="">
+        <img *ngIf="!this?.albumImage" [src]="this?.DEFAULT_IMAGE" alt="">
+        <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
       </div>
     </div>
   </ion-toolbar>

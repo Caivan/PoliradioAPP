@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { SonginfoService } from "../services/songinfo.service";
 import { Observable } from 'rxjs';
@@ -13,12 +13,15 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
 
   @ViewChild('audioPlayer', { static: true }) audioPlayer: HTMLMediaElement;
 
   public URL = environment.ACCESS_POINT_STREAMING;
+  public DEFAULT_IMAGE:String = "../../assets/audioplayer/null-image.png";
+
   song$: Observable<songInfo>;
   song: songInfo;
   loaded = false;

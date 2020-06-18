@@ -7,7 +7,7 @@
         <img *ngIf="post?.featured_media" [src]="post?.featured_media">
         <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
         <ion-card-content>
-          <div [innerHTML]="post.excerpt.rendered"></div>
+          <div [innerHTML]="post.excerpt.rendered | keepHtml"></div>
         </ion-card-content>
       </ion-card>
     </ion-item>

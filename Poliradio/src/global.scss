@@ -26,11 +26,16 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 brand{
-    --main-color-tabs: #2c86ec;
+    --main-color-tabs: #0F385A !important;
 }
 
+body{
+  background-color: var(--main-color);
+}
+
+
 ion-tab-button {
-    --background: var(--main-color-tabs) !important;
+    background: var(--main-color-tabs) !important;
 
     --ripple-color: var(--ion-color-primary);
     --color: var(--ion-color-light-shade);
@@ -38,6 +43,10 @@ ion-tab-button {
   }
   
   ion-tab-button.tab-selected {
-    --background: var(--main-color-tabs) !important;
-    --color-selected: var(--ion-color-light);
+    background: var(--main-color-tabs) !important;
+    --color-selected: var(--ion-color-medium);
   }
+  
+  .no-scroll {
+    --overflow: hidden
+}

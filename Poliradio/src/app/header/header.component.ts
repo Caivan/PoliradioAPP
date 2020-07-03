@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation } from '@ang
 import { Router, NavigationStart } from '@angular/router';
 import { SonginfoService } from "../services/songinfo.service";
 import { Observable } from 'rxjs';
-import { stringify } from 'querystring';
-import { format } from 'url';
-import { formatNumber, formatDate } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { songInfo } from '../Model/songInfo';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +18,7 @@ export class HeaderComponent {
   @ViewChild('audioPlayer', { static: true }) audioPlayer: HTMLMediaElement;
 
   public URL = environment.ACCESS_POINT_STREAMING;
-  public DEFAULT_IMAGE:String = "../../assets/audioplayer/null-image.png";
+  public DEFAULT_IMAGE:String = "../../assets/POLI_RADIO_APP/IMAGEN-POR-DEFECTO.png";
 
   song$: Observable<songInfo>;
   song: songInfo;
@@ -37,6 +35,12 @@ export class HeaderComponent {
   actualHour:string;
   position:number;
   durationValues: string[];
+  backgroundImages = {
+    on: "url('../../assets/POLI_RADIO_APP/BOTON-ON.png')",
+    off: "url('../../assets/POLI_RADIO_APP/BOTON-OFF.png')",
+
+  };
+  backgroundImage:string;
   
   constructor(private router: Router, private songinfoService: SonginfoService, private localNotifications : LocalNotifications) {
     router.events.forEach((event) => {
@@ -48,7 +52,7 @@ export class HeaderComponent {
     this.getCurrent();
     this.songCurrentName = this.songName;
   }
-  ngOnInit(): void {   
+  ngOnInit(): void {  
     this.localNotifications.cancelAll(); 
     this.song$ = this.songinfoService.getInfo();
     this.song$.subscribe(resp => {
@@ -84,8 +88,8 @@ export class HeaderComponent {
     if (this.loaded) {
       if (!this.isPlaying) {
         this.audioPlayer.play();
+        this.backgroundImage = this.backgroundImages.on;
         this.isPlaying = true;
-
         this.localNotifications.schedule({
           id: 1,
           title:'PoliRadio reproduciendo',
@@ -113,6 +117,7 @@ export class HeaderComponent {
   stop() {
     if (this.isPlaying) {
       this.audioPlayer.pause();
+     // this.backgroundImage = this.backgroundImages.off;
       this.isPlaying = false;
       this.progress = 0;
       this.localNotifications.cancelAll();
@@ -131,5 +136,9 @@ export class HeaderComponent {
     let y = Number(Number(this.startSongHour[0]) * 3600) + Number(this.startSongHour[1]) * 60 + Number(this.startSongHour[2]); //hora inicio cancion en segundos      
     this.duration = Number(this.durationValues[0]) * 3600 + Number(this.durationValues[1]) * 60 + Number(this.durationValues[2]);
     this.position = (x - y) / this.duration; //posicion inicial barra de progreso   
+  }
+
+  getBackgroundImage():String{
+    return this.backgroundImage = this.backgroundImages.on;
   }
 }

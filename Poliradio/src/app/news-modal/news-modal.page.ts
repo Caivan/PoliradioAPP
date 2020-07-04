@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
 import { ModalController } from "@ionic/angular";
 
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-news-modal',
   templateUrl: './news-modal.page.html',
@@ -9,13 +11,15 @@ import { ModalController } from "@ionic/angular";
 })
 export class NewsModalPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  @Input() public post: any;
+  content;
+
+  constructor(private modalController: ModalController,    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     console.log(this.post)
+    this.content = this.sanitizer.bypassSecurityTrustHtml(this.post.content.rendered);
   }
-
-  @Input() public post: any;
 
   async closeModal() {
     await this.modalController.dismiss();

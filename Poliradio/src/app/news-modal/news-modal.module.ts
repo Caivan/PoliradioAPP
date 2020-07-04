@@ -6,12 +6,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { NewsModalPage } from './news-modal.page';
 
+import { EscapeHtmlPipe } from '../pipes/keep-html.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
   ],
-  declarations: [NewsModalPage]
+  declarations: [NewsModalPage, EscapeHtmlPipe]
 })
 export class NewsModalPageModule {}

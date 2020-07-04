@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { SharedModule } from '../shared/shared.module';
 import { NewsModalPage } from '../news-modal/news-modal.page';
 
+import { EscapeHtmlPipe } from '../pipes/keep-html.pipe';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { NewsModalPage } from '../news-modal/news-modal.page';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page, NewsModalPage],
+  declarations: [Tab1Page, NewsModalPage, EscapeHtmlPipe],
   entryComponents: [NewsModalPage]
 })
 export class Tab1PageModule {}

@@ -8,11 +8,7 @@
         <img *ngIf="post?.featured_media" [src]="post?.featured_media">
         <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
         <ion-card-content>
-<<<<<<< HEAD
           <span [innerHTML]="post.excerpt.rendered" class="card-content"></span>
-=======
-          <div [innerHTML]="post.excerpt.rendered | keepHtml"></div>
->>>>>>> 04fc99f197c4d593b2a8b22c45c9a2c517cc4ce6
         </ion-card-content>
       </ion-card>
     </ion-item>

@@ -1,3 +1,25 @@
+ion-toolbar{
+  background: #0F385A;
+}
+
+.hydrated{
+  color:#A6CE38;
+  font-size: small;
+  text-align: left;
+}
+
+.toolbar{
+  --background:#0F385A !important;
+  font-size: small;
+  text-align: left;
+}
+
+ion-title{
+  -webkit-padding-start: 5px;
+  padding-inline-start: 0.2%;
+}
+
+
 .content {
   margin: 2%;
 }

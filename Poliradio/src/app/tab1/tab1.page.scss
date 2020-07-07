@@ -78,3 +78,15 @@ ion-icon {
     }
   }
 }
+
+
+.card-content-ios {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 4px; 
+  padding-inline-start: 4px;
+  -webkit-padding-end: 4px;
+  padding-inline-end: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

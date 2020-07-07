@@ -19,8 +19,8 @@
           <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
         </div>
         <div class="player-controls scrubber">
-          <p style="font-weight: 700;" [innerHTML]="songName"> </p>
-          <small [innerHTML]="artistName"></small>
+          <ion-text style="font-weight: 700;">{{this.songName}}</ion-text>
+          <ion-text [innerHTML]="artistName"></ion-text>
         </div>
 
       </div>

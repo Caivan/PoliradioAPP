@@ -6,7 +6,7 @@ ion-toolbar, ion-header {
 
  .container{
    width: 100%;
-   height: 90px;
+   height: 96px;
  }
 
 .audio-player:hover {
@@ -51,27 +51,23 @@ ion-toolbar, ion-header {
   }
 
   .player-controls {
-    align-items: center;
+    display: flex;
+    align-items: baseline;
     justify-content: center;
+    flex-direction: column;
     color: #fff;
     margin-left: 0.1rem;
-    margin-right: auto;
-    flex: 2;
+    padding: 0;
     &.scrubber p {
       font-size: 0.6em;
       text-align:left;
     }
 
-    p {
-      font-size: 0.5em;
+    ion-text {
+      font-size: 0.6em;
       text-align: left;
-      margin: 1.5rem 0 0 0;
-    }
-    small{
-      display: block;
-      font-size: 0.5em;
-      display: block;
-      transform: translateX(-22.3%);
+      margin: 0rem 0 0 0;
+      z-index:9999;
     }
   }
   #play-btn {

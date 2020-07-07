@@ -1,7 +1,10 @@
 <div class="container">
 <app-header></app-header>
 <ion-content>
-  <ion-list>
+  <div class="loading" *ngIf="!news$">
+    <span>Cargando noticias...</span>
+  </div>
+  <ion-list *ngIf="news$">
 
     <ion-item *ngFor="let post of news$ | async">
       <ion-card class="card" (click)="openModal(post)">
@@ -12,8 +15,7 @@
         </ion-card-content>
       </ion-card>
     </ion-item>
-  </ion-list>--verbose
-
+  </ion-list>
   <ion-infinite-scroll threshold="5px" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>

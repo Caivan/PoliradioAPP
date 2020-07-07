@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { songInfo } from '../Model/songInfo';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
+import { computeStackId } from '@ionic/angular/directives/navigation/stack-utils';
 
 @Component({
   selector: 'app-header',
@@ -61,7 +62,8 @@ export class HeaderComponent {
           resp=updt;
         })                 
         this.song=resp;
-        this.songName = this.song.current.metadata.track_title;              
+        this.songName = this.song.current.metadata.track_title;   
+        this.removeHTML(this.songName)           
         this.artistName = this.song.current.metadata.artist_name;
         this.albumImage = this.song.current.album_artwork_image;
         this.durationValues = this.song.current.metadata.length.split(":");
@@ -140,5 +142,11 @@ export class HeaderComponent {
 
   getBackgroundImage():String{
     return this.backgroundImage = this.backgroundImages.on;
+  }
+
+
+  removeHTML(value:string):string{
+    let new_val = value.replace("<small>","").replace("</small>","");
+    return new_val;
   }
 }

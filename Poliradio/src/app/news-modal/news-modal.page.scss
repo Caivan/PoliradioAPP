@@ -10,18 +10,23 @@ ion-toolbar{
 
 .toolbar{
   --background:#0F385A !important;
-  font-size: small;
+  font-size: smaller;
   text-align: left;
 }
 
 ion-title{
   -webkit-padding-start: 5px;
-  padding-inline-start: 0.2%;
+  padding-inline-start: 5px;
 }
 
 
 .content {
   margin: 2%;
+  color: #0F385A;
+}
+
+div img{
+  margin: 0 auto;
 }
 
 .content {
@@ -29,15 +34,6 @@ ion-title{
     padding: 1%;
   }
   strong {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  p img {
-    transform: translate(50%,0);
-  }
-  h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;

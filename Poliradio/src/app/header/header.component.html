@@ -1,24 +1,28 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
-    <div class="audio-player">
+    <div class="container">
+      <div class="audio-player" [ngStyle]="{ 'background-image':'url(../../assets/POLI_RADIO_APP/POLIRADIO-BANNER.jpg)' }">
 
-      <div (click)="play()" *ngIf="!isPlaying" id="play-btn"></div>
-      <div (click)="stop()" *ngIf="isPlaying" id="play-btn" class="pause"></div>
+        <div (click)="play()" *ngIf="!isPlaying" id="play-btn"></div>
+        <div (click)="stop()" *ngIf="isPlaying" id="play-btn" class="pause"></div>
 
 
-      <div class="audio-wrapper" id="player-container" href="javascript:;">
-        <audio preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media" #audioPlayer>
-          <source [src]="URL" type="audio/mpeg">
-        </audio>
-      </div>
+        <div class="audio-wrapper" id="player-container" href="javascript:;">
+          <audio preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media"
+            #audioPlayer>
+            <source [src]="URL" type="audio/mpeg">
+          </audio>
+        </div>
 
-      <div class="player-controls scrubber">
-        <p style="font-weight: 700;" [innerHTML]="songName"> </p>
-        <small [innerHTML]="artistName"></small>
-      </div>
-      <div class="album-image">
-        <img *ngIf="!this?.albumImage" [src]="this?.DEFAULT_IMAGE" alt="">
-        <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
+        <div class="album-image">
+          <img *ngIf="!this?.albumImage" [src]="this?.DEFAULT_IMAGE" alt="">
+          <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
+        </div>
+        <div class="player-controls scrubber">
+          <ion-text style="font-weight: 700;"[innerHTML]="this.songName"></ion-text>
+          <ion-text [innerHTML]="artistName"></ion-text>
+        </div>
+
       </div>
     </div>
   </ion-toolbar>

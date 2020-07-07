@@ -1,13 +1,32 @@
 ion-content {
-  --background: translucent;
-  background-color: white;
-  }
-
-.card{
-  width: 100%;
+  --background: var(--main-color) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
-  .card-title{
+}
+
+.container{
+  width:100%;
+  height: 100%;
+}
+
+
+.card {
+  width: 100%;
+
+  .card-title {
     margin: 0.5%;
+    color: var(--main-color);
+    font-size: medium;
+  }
+  ion-card-content{
+    margin: 0;
+  }
+  .card-content{
+    margin: 0.5%;
+    color: var(--main-color);
+    font-size: small;
   }
 }
 
@@ -15,13 +34,13 @@ ion-icon {
   font-size: 45px;
   background-color: white;
 }
-#contentIcon{
+#contentIcon {
   display: inline-block;
   background-color: white;
   margin: 10px;
 }
 
-#contentIcon button{
+#contentIcon button {
   display: inline-block;
   margin-left: 50px;
   margin-right: 8px;
@@ -57,16 +76,17 @@ ion-icon {
       text-align: center;
       margin: 1.5rem 0 0 0;
     }
-    
   }
-  #play-btn {
-    background-image: url('http://www.lukeduncan.me/images/play-button.png');
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    margin: 1.5rem 0 2rem 2rem;
-    &.pause {
-      background-image: url('http://www.lukeduncan.me/images/pause-button.png');
-    }
-  }
+}
+
+
+.card-content-ios {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 4px; 
+  padding-inline-start: 4px;
+  -webkit-padding-end: 4px;
+  padding-inline-end: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }

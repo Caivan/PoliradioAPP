@@ -1,21 +1,25 @@
+<div class="container">
 <app-header></app-header>
-<ion-content [fullscreen]="true">
-  <ion-list>
+<ion-content>
+  <div class="loading" *ngIf="!news$">
+    <span>Cargando noticias...</span>
+  </div>
+  <ion-list *ngIf="news$">
 
     <ion-item *ngFor="let post of news$ | async">
       <ion-card class="card" (click)="openModal(post)">
         <img *ngIf="post?.featured_media" [src]="post?.featured_media">
         <ion-card-title [innerHTML]="post.title.rendered" class="card-title"></ion-card-title>
         <ion-card-content>
-          <div [innerHTML]="post.excerpt.rendered | keepHtml"></div>
+          <span [innerHTML]="post.excerpt.rendered" class="card-content"></span>
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
-
   <ion-infinite-scroll threshold="5px" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
 </ion-content>
+</div>

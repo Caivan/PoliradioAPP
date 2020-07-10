@@ -8,6 +8,10 @@ import { environment } from "src/environments/environment";
 import { news } from "../Model/news";
 import { Observable } from 'rxjs';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+import { stringify } from 'querystring';
+import { promise } from 'protractor';
+
+
 
 @Component({
   selector: 'app-tab1',
@@ -49,22 +53,35 @@ export class Tab1Page {
   }
 
   async getNews(){
+     
     this.news$ = this.wpConnection.getNewsFromPage(this.page);
     this.news$.subscribe(res => {
       res.forEach(async element => {
+        
         await this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
           element.featured_media = res.source_url;
-        });
+          element.loaded = true;
+        }
+        ),error=>{
+          element.featured_media= "../../assets/POLI_RADIO_APP/POLIRADIO-BANNER.jpg";
+        };
+        
+        
       })
     });
     this.page++;
   }
-
+  
   async addNews(){
     this.wpConnection.getNewsFromPage(this.page).subscribe(res => {
       res.forEach(async element => {
-          this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
+        
+        //element.featured_media= "../../assets/POLI_RADIO_APP/POLIRADIO-BANNER.jpg"; 
+         this.wpConnection.getNewsImage(element.featured_media).subscribe(res => {
           element.featured_media = res.source_url;
+          element.loaded = true;
+        },error=>{
+          element.featured_media= "../../assets/POLI_RADIO_APP/POLIRADIO-BANNER.jpg";
         });
         this.news$.subscribe(res2 => {
           res2.push(element);

@@ -36,12 +36,18 @@ export class HeaderComponent {
   actualHour:string;
   position:number;
   durationValues: string[];
-  backgroundImages = {
-    on: "url('../../assets/POLI_RADIO_APP/BOTON-ON.png')",
-    off: "url('../../assets/POLI_RADIO_APP/BOTON-OFF.png')",
-
-  };
   backgroundImage:string;
+  
+  backgroundImages = {
+    on: "../../assets/POLI_RADIO_APP/POLIRADIO-ON.jpg",
+    off: "../../assets/POLI_RADIO_APP/POLIRADIO-OFF.jpg",
+  };
+  
+  buttonImage:string;
+  buttonsImages = {
+    on: "../../assets/POLI_RADIO_APP/BOTON-ON.png",
+    off: "../../assets/POLI_RADIO_APP/BOTON-OFF.png",
+  };
   
   constructor(private router: Router, private songinfoService: SonginfoService, private localNotifications : LocalNotifications) {
     router.events.forEach((event) => {
@@ -54,24 +60,48 @@ export class HeaderComponent {
     this.songCurrentName = this.songName;
   }
   ngOnInit(): void {  
+    
+   // this.songName ="Nombre de la canción no disponible";
+    //this.artistName = "Artista no disponible";
+
     this.localNotifications.cancelAll(); 
     this.song$ = this.songinfoService.getInfo();
-    this.song$.subscribe(resp => {
-      setInterval(() => {          
-        this.songinfoService.getInfo().subscribe(updt =>{
-          resp=updt;
-        })                 
-        this.song=resp;
-        this.songName = this.song.current.metadata.track_title;   
-        this.removeHTML(this.songName)           
-        this.artistName = this.song.current.metadata.artist_name;
-        this.albumImage = this.song.current.album_artwork_image;
-        this.durationValues = this.song.current.metadata.length.split(":");
-        this.startSongHour = this.song.current.starts.split(" ")[1].split(":");
-      },
-        1000);
-      //inicia la cancion                    
-    });
+    this.backgroundImage=this.backgroundImages.off;
+    this.buttonImage=this.buttonsImages.off;
+
+    if(this.song != undefined){
+      this.song$.subscribe(resp => {
+      
+        setInterval(() => {          
+          this.songinfoService.getInfo().subscribe(updt =>{
+            resp=updt;
+            this.song=resp;
+            this.songName = this.song.current.metadata.track_title;   
+            this.removeHTML(this.songName)           
+            this.artistName = this.song.current.metadata.artist_name;
+            this.albumImage = this.song.current.album_artwork_image;
+            this.durationValues = this.song.current.metadata.length.split(":");
+            this.startSongHour = this.song.current.starts.split(" ")[1].split(":");
+          },err=>{
+            this.songName ="Nombre de la canción no disponible";
+            this.artistName = "Artista no disponible";
+          });  
+
+        
+        },
+          1000);
+        //inicia la cancion                    
+      },err=>{
+        this.songName ="Nombre de la canción no disponible";
+        this.artistName = "Artista no disponible";
+      });  
+  }
+      else{
+      this.songName ="Nombre de la canción no disponible";
+      this.artistName = "Artista no disponible";
+      }
+              
+    
   }
 
   ngOnDestroy(): void {
@@ -91,6 +121,7 @@ export class HeaderComponent {
       if (!this.isPlaying) {
         this.audioPlayer.play();
         this.backgroundImage = this.backgroundImages.on;
+        this.buttonImage = this.buttonsImages.on;
         this.isPlaying = true;
         this.localNotifications.schedule({
           id: 1,
@@ -114,12 +145,59 @@ export class HeaderComponent {
         }
       }
     }
+
+
+  }
+
+  async backgroundUpdate(){
+    while(this.isPlaying)
+    {
+    await this.delay(50);
+    this.backgroundImage =this.backgroundImages.on;
+    await this.delay(50);
+    this.backgroundImage =this.backgroundImages.off;
+   }
+
+  }
+
+  private delay(ms: number){
+  return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  action(){
+
+    if (this.loaded) {
+      if (!this.isPlaying) {
+        this.audioPlayer.play();
+        this.backgroundImage = this.backgroundImages.on;
+        this.buttonImage = this.buttonsImages.on;
+        this.isPlaying = true;
+        this.localNotifications.schedule({
+          id: 1,
+          title:'PoliRadio reproduciendo',
+          text: 'Toque para volver a la aplicación',
+          lockscreen: true,
+          sticky: true
+        });    
+        this.backgroundUpdate();
+      }else{
+        this.audioPlayer.pause();
+        this.backgroundImage = this.backgroundImages.off;
+        this.buttonImage = this.buttonsImages.off;
+        this.isPlaying = false;
+        this.progress = 0;
+        this.localNotifications.cancelAll();
+      }
+    }
+
+
   }
 
   stop() {
     if (this.isPlaying) {
       this.audioPlayer.pause();
-     // this.backgroundImage = this.backgroundImages.off;
+      this.backgroundImage = this.backgroundImages.off;
+      this.buttonImage = this.buttonsImages.off;
       this.isPlaying = false;
       this.progress = 0;
       this.localNotifications.cancelAll();
@@ -132,12 +210,18 @@ export class HeaderComponent {
     //ssss  
   }
   getProgress() {
-    let actualHour = new Date();
-    actualHour.setHours(actualHour.getHours() + 5);
-    let x = Number(actualHour.getHours()) * 3600 + Number(actualHour.getMinutes()) * 60 + Number(actualHour.getSeconds()); //hora actual en segundos 
-    let y = Number(Number(this.startSongHour[0]) * 3600) + Number(this.startSongHour[1]) * 60 + Number(this.startSongHour[2]); //hora inicio cancion en segundos      
-    this.duration = Number(this.durationValues[0]) * 3600 + Number(this.durationValues[1]) * 60 + Number(this.durationValues[2]);
-    this.position = (x - y) / this.duration; //posicion inicial barra de progreso   
+    try{
+      
+      let actualHour = new Date();
+      actualHour.setHours(actualHour.getHours() + 5);
+      let x = Number(actualHour.getHours()) * 3600 + Number(actualHour.getMinutes()) * 60 + Number(actualHour.getSeconds()); //hora actual en segundos 
+      let y = Number(Number(this.startSongHour[0]) * 3600) + Number(this.startSongHour[1]) * 60 + Number(this.startSongHour[2]); //hora inicio cancion en segundos      
+      this.duration = Number(this.durationValues[0]) * 3600 + Number(this.durationValues[1]) * 60 + Number(this.durationValues[2]);
+      this.position = (x - y) / this.duration; //posicion inicial barra de progreso   
+
+    }catch(error){
+      console.log("Metadata unaviable!!")
+    }
   }
 
   getBackgroundImage():String{

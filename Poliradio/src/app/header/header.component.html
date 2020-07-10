@@ -1,31 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <div class="container">
-      <div class="audio-player" [ngStyle]="{ 'background-image':'url(../../assets/POLI_RADIO_APP/POLIRADIO-BANNER.jpg)' }">
-
-        <div (click)="play()" *ngIf="!isPlaying" id="play-btn"></div>
-        <div (click)="stop()" *ngIf="isPlaying" id="play-btn" class="pause"></div>
-
-
-        <div class="audio-wrapper" id="player-container" href="javascript:;">
-          <audio preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media"
-            #audioPlayer>
-            <source [src]="URL" type="audio/mpeg">
-          </audio>
-        </div>
-
-        <div class="album-image">
-          <img *ngIf="!this?.albumImage" [src]="this?.DEFAULT_IMAGE" alt="">
-          <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
-        </div>
-        <div class="player-controls scrubber">
-          <ion-text style="font-weight: 700;"[innerHTML]="this.songName"></ion-text>
-          <ion-text [innerHTML]="artistName"></ion-text>
-        </div>
-
-      </div>
+    
+    <div class="Background">
+      <ion-img  [src]="this?.backgroundImage"></ion-img>
     </div>
+
+    <div class="buttons">
+      <ion-img (click)="action()" [src] = "this?.buttonImage" ></ion-img>
+    </div>
+
+    <div class="album-image">
+      <img *ngIf="!this?.albumImage" [src]="this?.DEFAULT_IMAGE" alt="">
+      <img *ngIf="this?.albumImage" [src]="this?.albumImage" alt="">
+    </div>
+
+    <div class="audio-wrapper" id="player-container" href="javascript:;">
+      <audio preload="metadata" (loadedmetadata)="control($event)" (timeupdate)="update()" name="media"
+        #audioPlayer>
+        <source [src]="URL" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <div class="info">
+      <ion-text class="Tiulo" style="font-weight: 700;"[innerHTML]="this.songName"></ion-text>
+      <br>
+      <ion-text class="Artista" [innerHTML]="artistName"></ion-text>
+    </div>
+
   </ion-toolbar>
+  
   <ion-progress-bar [value]="progress"> </ion-progress-bar>
 
 

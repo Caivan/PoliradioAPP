@@ -39,13 +39,15 @@ ion-tab-button {
 
     --ripple-color: var(--ion-color-primary);
     --color: var(--ion-color-light-shade);
-    --color-selected: var(--ion-color-medium);
+   --color-selected: var(--ion-color-medium);
   }
   
   ion-tab-button.tab-selected {
     background: var(--main-color-tabs) !important;
     --color-selected: var(--ion-color-medium);
   }
+
+
   
   .no-scroll {
     --overflow: hidden

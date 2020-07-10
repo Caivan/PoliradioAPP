@@ -2,12 +2,21 @@ ion-toolbar{
   background: #0F385A;
 }
 
+
+/*
 .hydrated{
   color:#A6CE38;
   font-size: small;
   text-align: left;
 }
 
+*/
+.Title{
+  color:#A6CE38;
+  font-size: small;
+  text-align: left;
+  
+}
 .toolbar{
   --background:#0F385A !important;
   font-size: smaller;
@@ -23,6 +32,8 @@ ion-title{
 .content {
   margin: 2%;
   color: #0F385A;
+  font-size: medium;
+  text-align: left;
 }
 
 div img{

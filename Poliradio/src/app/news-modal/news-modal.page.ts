@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
 import { ModalController } from "@ionic/angular";
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-news-modal',
@@ -15,10 +16,18 @@ export class NewsModalPage implements OnInit {
   content;
 
   constructor(private modalController: ModalController,    private sanitizer: DomSanitizer) { }
-
+  
   ngOnInit() {
-    console.log(this.post)
-    this.content = this.sanitizer.bypassSecurityTrustHtml(this.post.content.rendered);
+    let contenido:String;
+    contenido=this.sanitizer.bypassSecurityTrustHtml(this.post.content.rendered)+"";
+    //console.log(contenido)
+    
+    if(contenido.startsWith("SafeValue must use [property]=binding:")){
+      contenido=contenido.substring(38,contenido.length)
+      }
+  //console.log(this.content);
+    this.content = contenido;
+    
   }
 
   async closeModal() {
